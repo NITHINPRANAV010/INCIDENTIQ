@@ -35,7 +35,9 @@ export const PIPELINE_STAGES = [
 ]
 
 function getApiKey() {
-  const key = import.meta.env.VITE_GEMINI_API_KEY || ''
+  const key = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) ||
+              (typeof process !== 'undefined' && process.env?.VITE_GEMINI_API_KEY) ||
+              ''
   return (key && key !== 'your_gemini_api_key_here') ? key.trim() : null
 }
 
@@ -71,7 +73,7 @@ async function callGemini(systemInstruction, userPrompt, retries = 1) {
               { role: 'user', content: userPrompt },
             ],
             temperature: 0.1,
-            max_tokens: 3500,
+            max_tokens: 2048,
             response_format: { type: 'json_object' },
           }),
         })
