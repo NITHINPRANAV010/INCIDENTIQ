@@ -21,7 +21,8 @@
  * =========================================================
  */
 
-const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
+const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
+const OPENROUTER_API_BASE = 'https://openrouter.ai/api/v1/chat/completions'
 
 export const PIPELINE_STAGES = [
   { key: 'parsed',     label: 'Evidence Parsed',              detail: 'Evidence files verified and read' },
@@ -35,11 +36,11 @@ export const PIPELINE_STAGES = [
 
 function getApiKey() {
   const key = import.meta.env.VITE_GEMINI_API_KEY || ''
-  return (key && key !== 'your_gemini_api_key_here') ? key : null
+  return (key && key !== 'your_gemini_api_key_here') ? key.trim() : null
 }
 
 /**
- * Core Gemini API caller with retry logic.
+ * Universal AI API caller supporting OpenRouter (sk-or-...) and Google Generative Language API.
  */
 async function callGemini(systemInstruction, userPrompt, retries = 1) {
   const apiKey = getApiKey()
@@ -47,32 +48,67 @@ async function callGemini(systemInstruction, userPrompt, retries = 1) {
     throw new Error('GEMINI_API_KEY_MISSING')
   }
 
-  const payload = {
-    system_instruction: { parts: [{ text: systemInstruction }] },
-    contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
-    generationConfig: {
-      temperature: 0.1,
-      responseMimeType: 'application/json',
-    },
-  }
+  const isOpenRouter = apiKey.startsWith('sk-or-') || apiKey.startsWith('sk-')
 
   let lastError
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetch(`${API_BASE}?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
+      let res, data, rawText = ''
 
-      if (!res.ok) {
-        const errBody = await res.json().catch(() => ({}))
-        const msg = errBody?.error?.message || `HTTP ${res.status}`
-        throw new Error(`Gemini API error: ${msg}`)
+      if (isOpenRouter) {
+        res = await fetch(OPENROUTER_API_BASE, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': 'http://localhost:5173',
+            'X-Title': 'IncidentIQ',
+          },
+          body: JSON.stringify({
+            model: 'google/gemini-2.5-flash',
+            messages: [
+              { role: 'system', content: systemInstruction },
+              { role: 'user', content: userPrompt },
+            ],
+            temperature: 0.1,
+            max_tokens: 3500,
+            response_format: { type: 'json_object' },
+          }),
+        })
+
+        if (!res.ok) {
+          const errBody = await res.json().catch(() => ({}))
+          const msg = errBody?.error?.message || `HTTP ${res.status}`
+          throw new Error(`OpenRouter API error: ${msg}`)
+        }
+
+        data = await res.json()
+        rawText = data?.choices?.[0]?.message?.content || ''
+      } else {
+        const payload = {
+          system_instruction: { parts: [{ text: systemInstruction }] },
+          contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+          generationConfig: {
+            temperature: 0.1,
+            responseMimeType: 'application/json',
+          },
+        }
+
+        res = await fetch(`${GEMINI_API_BASE}?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+
+        if (!res.ok) {
+          const errBody = await res.json().catch(() => ({}))
+          const msg = errBody?.error?.message || `HTTP ${res.status}`
+          throw new Error(`Gemini API error: ${msg}`)
+        }
+
+        data = await res.json()
+        rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
       }
-
-      const data = await res.json()
-      const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
 
       try { return JSON.parse(rawText) } catch { /* fall through */ }
 
