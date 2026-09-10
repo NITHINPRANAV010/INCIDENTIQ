@@ -1,0 +1,163 @@
+/* ============================================================
+   IncidentVerdict — Premium sidebar verdict panel
+   ============================================================ */
+
+.verdict-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Subtle inner glow at top */
+.verdict-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  z-index: 1;
+}
+
+/* Severity accent — top + left glow */
+.verdict-critical {
+  border-top: 2px solid var(--critical);
+  box-shadow: 0 0 24px rgba(255,77,77,0.07), var(--shadow-sm);
+}
+.verdict-high {
+  border-top: 2px solid var(--high);
+  box-shadow: 0 0 20px rgba(255,159,67,0.06), var(--shadow-sm);
+}
+.verdict-medium {
+  border-top: 2px solid var(--medium);
+}
+.verdict-low {
+  border-top: 2px solid var(--low);
+}
+.verdict-info {
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 0 16px rgba(79,140,255,0.06), var(--shadow-sm);
+}
+
+.verdict-top-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  padding: var(--sp-3) var(--sp-3) var(--sp-2);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.verdict-top-label::before {
+  content: '';
+  width: 2px;
+  height: 9px;
+  background: var(--text-disabled);
+  border-radius: 1px;
+  display: inline-block;
+}
+
+.verdict-main-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0 var(--sp-3) var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.verdict-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  padding: 2px 8px;
+  border-radius: var(--r-xs);
+  border: 1px solid transparent;
+}
+
+.verdict-badge.badge-critical {
+  background: var(--critical-bg);
+  color: var(--critical);
+  border-color: var(--critical-border);
+  box-shadow: 0 0 8px rgba(255,77,77,0.12);
+}
+.verdict-badge.badge-high   { background: var(--high-bg);   color: var(--high);   border-color: var(--high-border); }
+.verdict-badge.badge-medium { background: var(--medium-bg); color: var(--medium); border-color: var(--medium-border); }
+.verdict-badge.badge-low    { background: var(--low-bg);     color: var(--low);    border-color: var(--low-border); }
+.verdict-badge.badge-info   { background: var(--info-bg);    color: var(--info);   border-color: var(--info-border); }
+
+.verdict-confidence-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+.verdict-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 0 var(--sp-3) var(--sp-2);
+  line-height: 1.38;
+  letter-spacing: 0.01em;
+}
+
+.verdict-summary-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 0 var(--sp-3) var(--sp-3);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+/* ── Key Indicators ── */
+.verdict-indicators-section {
+  padding: var(--sp-3);
+}
+
+.indicators-header-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: var(--sp-2);
+}
+
+.indicators-chip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.indicator-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-faint);
+  transition: background var(--t-fast);
+}
+
+.indicator-chip:last-child { border-bottom: none; }
+.indicator-chip:hover { background: transparent; }
+
+.indicator-name {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}

@@ -1,0 +1,187 @@
+/* ============================================================
+   AttackTimeline — Premium forensic vertical timeline
+   ============================================================ */
+
+.timeline-section-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-surface) 100%);
+}
+
+.timeline-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.timeline-title::before {
+  content: '';
+  width: 2px;
+  height: 10px;
+  background: var(--accent);
+  opacity: 0.5;
+  border-radius: 1px;
+  display: inline-block;
+}
+
+.timeline-event-count {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  padding: 2px 8px;
+  border-radius: var(--r-xs);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* ── Forensic Timeline ── */
+.forensic-timeline {
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-forensic-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  min-height: 38px;
+}
+
+.timeline-forensic-row:hover .timeline-entry-content {
+  background: rgba(255,255,255,0.025);
+  border-radius: var(--r-sm);
+}
+
+/* Timestamp column */
+.timeline-time-col {
+  width: 72px;
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding-top: 5px;
+  text-align: right;
+  padding-right: var(--sp-3);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* Dot + vertical line column */
+.timeline-line-col {
+  width: 20px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 5px;
+}
+
+.timeline-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  border: 1.5px solid var(--bg-surface);
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+}
+
+.timeline-forensic-row:hover .timeline-dot {
+  transform: scale(1.25);
+}
+
+.timeline-dot.dot-critical {
+  background: var(--critical);
+  box-shadow: 0 0 8px rgba(255,77,77,0.5);
+}
+.timeline-dot.dot-high {
+  background: var(--high);
+  box-shadow: 0 0 6px rgba(255,159,67,0.35);
+}
+.timeline-dot.dot-medium {
+  background: var(--medium);
+}
+.timeline-dot.dot-low {
+  background: var(--low);
+}
+.timeline-dot.dot-info {
+  background: var(--border-strong);
+}
+
+.timeline-line {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(180deg, var(--border-default) 0%, var(--border-faint) 100%);
+  min-height: 24px;
+  margin-top: 3px;
+}
+
+/* Content area */
+.timeline-entry-content {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  padding: 3px var(--sp-2) var(--sp-3);
+  flex-wrap: wrap;
+  min-width: 0;
+  transition: background var(--t-fast);
+}
+
+.timeline-entry-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.timeline-id-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  cursor: pointer;
+  font-size: 9px;
+  transition: all var(--t-fast);
+}
+
+.timeline-id-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-border);
+  transform: translateY(-1px);
+}
+
+.timeline-row-targeted {
+  background: rgba(255, 211, 42, 0.08) !important;
+  border-radius: var(--r-sm);
+  outline: 1px solid #FFD32A;
+  animation: timelineTargetPulse 2.5s ease-out;
+}
+
+@keyframes timelineTargetPulse {
+  0%   { background: rgba(255, 211, 42, 0.3); }
+  50%  { background: rgba(255, 211, 42, 0.15); }
+  100% { background: rgba(255, 211, 42, 0.08); }
+}

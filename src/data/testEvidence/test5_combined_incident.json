@@ -1,0 +1,59 @@
+[
+  {
+    "alert_id": "ALERT-101",
+    "timestamp": "2024-11-15T22:08:00Z",
+    "rule": "SSH_BRUTE_FORCE",
+    "severity": "HIGH",
+    "source_ip": "198.51.100.77",
+    "destination_ip": "10.0.1.50",
+    "destination_port": 22,
+    "user": "jsmith",
+    "action": "ALERT",
+    "description": "SSH brute force detected from external IP 198.51.100.77 targeting user jsmith"
+  },
+  {
+    "alert_id": "ALERT-102",
+    "timestamp": "2024-11-15T22:08:14Z",
+    "rule": "COMPROMISED_ACCOUNT_LOGIN",
+    "severity": "CRITICAL",
+    "source_ip": "198.51.100.77",
+    "destination_ip": "10.0.1.50",
+    "destination_port": 22,
+    "user": "jsmith",
+    "action": "ACCEPTED",
+    "description": "Successful authentication following 6 failed login attempts from same IP"
+  },
+  {
+    "alert_id": "ALERT-103",
+    "timestamp": "2024-11-15T22:08:35Z",
+    "rule": "UNAUTHORIZED_PRIVILEGE_ESCALATION",
+    "severity": "CRITICAL",
+    "process": "/bin/bash",
+    "user": "root",
+    "action": "EXEC",
+    "description": "User jsmith spawned root interactive shell via sudo"
+  },
+  {
+    "alert_id": "ALERT-104",
+    "timestamp": "2024-11-15T22:13:24Z",
+    "rule": "REVERSE_SHELL_ESTABLISHED",
+    "severity": "CRITICAL",
+    "source_ip": "10.0.1.50",
+    "destination_ip": "185.234.219.18",
+    "destination_port": 4444,
+    "process": "nc",
+    "action": "CONNECT",
+    "description": "Outbound connection to known C2 IP on port 4444 executing bash"
+  },
+  {
+    "alert_id": "ALERT-105",
+    "timestamp": "2024-11-15T22:16:15Z",
+    "rule": "DATA_EXFILTRATION_DETECTED",
+    "severity": "CRITICAL",
+    "source_ip": "10.0.1.50",
+    "destination_ip": "185.234.219.18",
+    "destination_port": 443,
+    "action": "TRANSFER",
+    "description": "Exfiltration of 248 KB archive to external address 185.234.219.18"
+  }
+]

@@ -1,0 +1,6 @@
+Nov 15 22:08:14 gateway-server sshd[4830]: Accepted password for jsmith from 198.51.100.77 port 50110 ssh2
+Nov 15 22:08:20 gateway-server sudo[5001]: jsmith : TTY=pts/1 ; PWD=/home/jsmith ; USER=root ; COMMAND=/usr/bin/id
+Nov 15 22:08:22 gateway-server sudo[5002]: pam_unix(sudo:session): session opened for user root by jsmith(uid=1001)
+Nov 15 22:08:35 gateway-server sudo[5010]: jsmith : TTY=pts/1 ; PWD=/home/jsmith ; USER=root ; COMMAND=/bin/bash
+Nov 15 22:08:35 gateway-server sudo[5010]: pam_unix(sudo:session): session opened for user root by jsmith(uid=1001)
+Nov 15 22:09:10 gateway-server sudo[5020]: jsmith : TTY=pts/1 ; PWD=/tmp ; USER=root ; COMMAND=/bin/cat /etc/shadow

@@ -1,0 +1,6 @@
+Nov 15 09:00:12 corporate-host-01 sshd[1200]: Accepted publickey for alice from 10.0.2.15 port 41234 ssh2: RSA SHA256:abcd1234efgh5678
+Nov 15 09:00:12 corporate-host-01 systemd-logind[400]: New session 12 of user alice.
+Nov 15 09:05:45 corporate-host-01 sshd[1250]: Accepted password for bob from 10.0.2.22 port 41250 ssh2
+Nov 15 09:05:45 corporate-host-01 systemd-logind[400]: New session 13 of user bob.
+Nov 15 09:12:01 corporate-host-01 sshd[1300]: Received disconnect from 10.0.2.15 port 41234:11: disconnected by user
+Nov 15 09:12:01 corporate-host-01 systemd-logind[400]: Session 12 of user alice logged out.

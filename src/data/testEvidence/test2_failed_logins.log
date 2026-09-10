@@ -1,0 +1,8 @@
+Nov 15 22:08:01 gateway-server sshd[4821]: Failed password for invalid user admin from 198.51.100.77 port 50101 ssh2
+Nov 15 22:08:03 gateway-server sshd[4822]: Failed password for invalid user root from 198.51.100.77 port 50102 ssh2
+Nov 15 22:08:05 gateway-server sshd[4823]: Failed password for invalid user test from 198.51.100.77 port 50103 ssh2
+Nov 15 22:08:07 gateway-server sshd[4824]: Failed password for jsmith from 198.51.100.77 port 50104 ssh2
+Nov 15 22:08:09 gateway-server sshd[4825]: Failed password for jsmith from 198.51.100.77 port 50105 ssh2
+Nov 15 22:08:11 gateway-server sshd[4826]: Failed password for jsmith from 198.51.100.77 port 50106 ssh2
+Nov 15 22:08:14 gateway-server sshd[4830]: Accepted password for jsmith from 198.51.100.77 port 50110 ssh2
+Nov 15 22:08:14 gateway-server systemd-logind[401]: New session 55 of user jsmith.

@@ -1,0 +1,5 @@
+timestamp,source_ip,destination_ip,port,process,action,bytes_transferred,message,severity
+2024-11-15T22:13:24Z,10.0.1.50,185.234.219.18,4444,nc,connect,0,Outbound connection established on reverse shell port,CRITICAL
+2024-11-15T22:13:35Z,10.0.1.50,185.234.219.18,80,wget,connect,1540,HTTP payload download initiated,HIGH
+2024-11-15T22:14:05Z,10.0.1.50,185.234.219.18,443,curl,connect,850,Periodic C2 beaconing observed,HIGH
+2024-11-15T22:16:15Z,10.0.1.50,185.234.219.18,443,tar,transfer,248432,Large encrypted archive data transfer,CRITICAL

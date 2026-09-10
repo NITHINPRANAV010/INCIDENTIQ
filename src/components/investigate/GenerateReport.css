@@ -1,0 +1,135 @@
+/* ============================================================
+   GenerateReport — Premium report generation
+   ============================================================ */
+
+.generate-report-section { /* wrapper */ }
+
+.gen-report-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Pre-generation state ── */
+.gen-trigger-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: linear-gradient(135deg, rgba(79,140,255,0.04) 0%, transparent 60%);
+}
+
+.gen-info-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.gen-report-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.gen-report-title::before {
+  content: '';
+  width: 2px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 1px;
+  opacity: 0.6;
+  display: inline-block;
+}
+
+.gen-report-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.gen-report-primary-btn {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  min-width: 200px;
+  justify-content: center;
+}
+
+/* ── Completed state ── */
+.gen-completed-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: linear-gradient(135deg, rgba(62,201,138,0.04) 0%, transparent 60%);
+}
+
+.report-ready-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.report-ready-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--success);
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.report-ready-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(62,201,138,0.6);
+  display: inline-block;
+}
+
+.report-ready-check {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.report-ready-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.report-ready-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.gen-report-error {
+  margin: 0 var(--sp-4) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--critical-bg);
+  border: 1px solid var(--critical-border);
+  border-left: 3px solid var(--critical);
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  color: var(--critical);
+  font-family: var(--font-mono);
+}
